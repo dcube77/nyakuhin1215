@@ -1,0 +1,856 @@
+@charset "UTF-8";
+
+html {
+  font-size: 100%;
+}
+body {
+  color: #121212;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 16px;
+}
+img {
+  max-width: 100%;
+  vertical-align: bottom;
+}
+main p {
+  line-height: 1.5;
+}
+.wrapper {
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 20px;
+  margin: 0 auto;
+}
+
+.sec-title {
+  font-size: 32px;
+  font-weight: bold;
+  line-height: 1;
+  margin-bottom: 50px;
+  position: relative;
+  /* 疑似要素の位置を基準にするために必要 */
+}
+
+.sec-title::after {
+  content: "";
+  /* 疑似要素に空の内容を追加 */
+  display: block;
+  /* ブロック要素として扱う */
+  width: 100px;
+  /* アンダーラインの幅を指定（70%の長さ） */
+  height: 8px;
+  /* アンダーラインの高さ */
+  background: linear-gradient(to right, #007bff, #00d4ff);
+  /* グラデーションの色 */
+  position: absolute;
+  /* アンダーラインの位置を指定 */
+  left: 0;
+  /* 左端から始まる */
+  bottom: -25px;
+  /* タイトルの下に少し離して配置 */
+}
+
+/* HEADER */
+#header {
+  position: fixed;
+  top: 0;
+  height: 160px;
+  width: 100%;
+  padding: 20px 0;
+  z-index: 10;
+  background-color: #fff;
+  box-shadow: inset 0 -3px 5px rgba(0, 0, 0, 0.1); /* 内側にぼんやりした影を追加 */
+}
+#header .site_top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#header .logo {
+  width: 400px;
+}
+.logo_copy {
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+.top_right {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  /* 縦方向のセンタリング */
+  width: 50%;
+}
+.top_right p {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+#header .tel {
+  margin-right: 20px;
+  text-align: center;
+}
+#header .phone {
+  font-size: 24px;
+  font-weight: bold;
+}
+.telmark {
+  font-size: 14px;
+}
+
+/* ボタンのスタイル */
+.login-button {
+  background-color: #007bff;
+  /* ボタンの背景色 */
+  color: #fff;
+  /* ボタンの文字色 */
+  border: none;
+  /* ボーダーを無くす */
+  border-radius: 5px;
+  /* 角を丸くする */
+  padding: 10px 20px;
+  /* 内側の余白 */
+  cursor: pointer;
+  /* カーソルをポインタに */
+  transition: background-color 0.3s ease;
+  /* ホバー時のアニメーション */
+  font-size: 18px;
+}
+
+/* ホバー時のスタイル */
+.login-button:hover {
+  background-color: #0056b3;
+  /* ホバー時の背景色 */
+}
+
+/* ナビメニュー */
+#navi .nav-menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.nav-menu li {
+  margin-right: 30px;
+}
+
+.nav-menu li:last-child {
+  margin-right: 0;
+}
+
+.nav-menu li a {
+  font-weight: bold;
+  font-size: 18px;
+  padding: 5px 8px;
+  transition: background-color 0.3s, color 0.3s;
+  /* スムーズな変化 */
+}
+
+.nav-menu li a:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+
+/* メインビジュアル */
+main {
+  margin-top: 160px;
+  /* ヘッダーの高さを考慮 */
+}
+
+.mainvisual {
+  width: 100%;
+  height: calc(100vh - 160px);
+}
+.mainvisual img {
+  position: fixed;
+  top: 160px;
+  width: 100%;
+  /* 幅を100%に */
+  height: 100%;
+  /* 高さは自動で調整 */
+  object-fit: cover;
+  /* 画像のトリミングをカバー */
+  z-index: -2;
+  /* 背景として扱うため、下に配置 */
+}
+.text-overlay {
+  position: fixed;
+  top: 300px;
+  right: 80px;
+  z-index: -1;
+  opacity: 0;
+  /* 初期は透明 */
+  transform: translateY(70px);
+  /* 下から現れるために少し下に移動 */
+  transition: opacity 2.5s ease, transform 2.5s ease;
+  /* アニメーションの効果 */
+}
+.text-overlay.show {
+  opacity: 1;
+  /* 表示する */
+  transform: translateY(0);
+  /* 元の位置に戻す */
+}
+.text-overlay p {
+  font-family: "Oswald", sans-serif;
+  font-size: 64px;
+  font-weight: 700;
+  line-height: 1.5;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  /* シャドウ効果 */
+}
+
+/* メインナビ */
+/* 四角のスタイル */
+.main-nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  /* 3つの四角を横並びに */
+  padding: 0;
+}
+.main-nav ul li {
+  width: 30%;
+  /* 3つ並べるための幅設定 */
+  margin: 0 10px;
+}
+.main-nav a {
+  display: block;
+  padding: 40px 20px;
+  text-align: center;
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  text-decoration: none;
+  color: #000;
+}
+
+.main-nav a:hover {
+  background-color: #e0e0e0;
+  /* ホバー時の四角背景色変更 */
+}
+
+/* ボタンのスタイル */
+.btn {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border-radius: 5px;
+  text-align: center;
+  transition: background-color 0.3s ease;
+  /* 色変化にアニメーションを追加 */
+}
+
+.btn:hover {
+  background-color: #0056b3;
+  /* ボタンのホバー時の色 */
+}
+
+/* NEWS */
+.news {
+  margin-top: 50px;
+  background-color: #fff;
+  padding: 30px 0;
+}
+
+.newslist {
+  margin-bottom: 24px;
+}
+
+.newslist p {
+  padding-top: 12px;
+  font-size: 18px;
+}
+
+/* Message */
+.message {
+  background-color: #fff;
+  padding: 30px 0;
+}
+.top-message {
+  display: flex;
+  justify-content: space-between;
+}
+.top-message img {
+  width: 40%;
+  object-fit: cover;
+}
+.toptext {
+  width: 55%;
+}
+.messagetitle {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+.top-message p {
+  line-height: 1.75;
+  font-size: 18px;
+  margin-bottom: 12px;
+}
+.signature p {
+  margin-top: 30px;
+}
+.signature img {
+  width: 30%;
+}
+
+/* Products */
+.products {
+  background-color: #fff;
+  padding: 30px 0;
+}
+
+.overview {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.overview img {
+  width: 50%;
+}
+
+/* 左側の製品メニューリスト */
+.product-list {
+  width: 50%;
+  padding-right: 20px;
+}
+
+.product-list li {
+  list-style: none;
+  margin-bottom: 28px;
+  padding: 40px 16px;
+  background: linear-gradient(135deg, #4e6b50, #b5a642);
+  /* 深いグリーンとゴールド系のグラデーション */
+  border-radius: 8px;
+  transition: 0.3s ease;
+  /* 全プロパティの変化 */
+}
+
+/* 最後のliから余白を除去 */
+.product-list li:last-child {
+  margin-bottom: 0;
+}
+
+.product-list li:hover {
+  background: linear-gradient(135deg, #3c5440, #9a8b37);
+  /* ホバー時に少し暗くなるグラデーション */
+}
+
+.product-list li a {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-decoration: none;
+  color: #fff;
+  font-size: 20px;
+}
+
+.product-list li a .more {
+  display: block;
+  text-align: right;
+  font-size: 14px;
+  color: #fff;
+  margin-top: 8px;
+}
+
+.product-list li a .more::after {
+  content: "→";
+  margin-left: 5px;
+  font-size: 14px;
+}
+
+/* Footer */
+#footer {
+  background-color: #ececea;
+  padding: 50px 0;
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+}
+
+.fotter-left {
+  width: 40%;
+  margin-right: 20px;
+}
+
+iframe {
+  width: 60%;
+  /* 右側の幅を60%に指定 */
+}
+
+.policylist {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.footer-nav li {
+  margin-bottom: 16px;
+}
+
+.footer-nav li:last-child {
+  margin-bottom: 48px;
+}
+
+.company a {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.company p {
+  margin: 8px 0;
+}
+
+.policy {
+  margin: 20px 0 0;
+}
+
+.policylist li {
+  margin-right: 24px;
+  font-size: 14px;
+}
+
+#footer a:hover {
+  font-weight: bold;
+  text-decoration: underline;
+  text-decoration-color: #007bff;
+}
+
+/* 下層ページ共通 */
+.page-title {
+  font-size: 40px;
+  font-weight: bold;
+  position: relative; /* 相対位置を設定 */
+  padding: 0; /* パディングをリセット */
+  margin: 0 auto; /* マージンをリセット */
+  height: 130px; /* 高さを指定（調整可能） */
+  background-image: url('../images/top1.jpg'); /* 画像のパス */
+  background-size: cover; /* 背景画像が要素全体をカバーする */
+  background-position: center; /* 画像の位置を中央に */
+}
+.text-background {
+  display: block; /* テキストをブロック要素に */
+  background-color: rgba(255, 255, 255, 0.7); /* 白の半透明背景 */
+  padding: 5px 20px; /* テキストに余白を追加 */
+  width: 100%; /* 幅を100%に設定 */
+  box-sizing: border-box; /* パディングを含むボックスモデル */
+  position: absolute; /* 絶対位置 */
+  bottom: 20px; /* テキストを下に寄せる */
+  left: 0; /* 左端に寄せる */
+  z-index: 1; /* テキストを前面に */
+}
+
+.subpage-block {
+  margin-top: 80px;
+}
+.subpage-block:last-child {
+  margin-bottom: 60px;
+}
+.subpage-content {
+  padding-left: 120px;
+}
+
+/* =========== 会社案内 ============ */
+.origin-content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.origin-content img {
+  width: 40%;
+  object-fit: cover;
+}
+
+.origin-content .origin-text {
+  width: 53%;
+}
+
+.origin-content p {
+  margin-bottom: 24px;
+}
+
+/* 会社概要 */
+.company-info-table {
+  width: 100%;
+  /* テーブル全体は幅100% */
+  border-collapse: collapse;
+  border: 1px solid #ccc;
+}
+.company-info-table th {
+  width: 180px;
+  /* thの幅を固定に指定 */
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+  background-color: #f4f4f4;
+}
+.company-info-table td {
+  width: auto;
+  /* tdは自動で幅を調整 */
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+.company-info-table li {
+  margin-bottom: 6px;
+}
+.company-info-table li:last-child {
+  margin-bottom: 0;
+}
+
+/* 沿革 */
+.timeline {
+  list-style: none;
+  /* デフォルトの箇条書きを削除 */
+  padding: 0;
+  margin: 0;
+}
+
+.timeline li {
+  display: flex;
+  justify-content: space-between;
+  /* 左右に要素を分ける */
+  padding: 10px;
+  /* 上下にスペースを確保 */
+  border-top: 1px solid #ccc;
+  /* 上に罫線 */
+}
+
+.timeline li:last-child {
+  border-bottom: 1px solid #ccc;
+  /* 最後の項目だけ下に罫線 */
+}
+
+.timeline .date {
+  font-weight: bold;
+  width: 15%;
+  /* 日付の幅を指定 */
+}
+
+.timeline .description {
+  width: 85%;
+  /* 内容部分の幅を指定 */
+}
+/* 薬局薬剤師用 */
+.ForPharmacists .login-button {
+  margin-top:10px;
+}
+
+/* ================SP=============== */
+@media (max-width: 900px) {
+
+  /* HEADER */
+  /* 高さを修正 */
+  #header {
+    height: 130px;
+  }
+
+  #header .site_top {
+    flex-direction: column;
+    /* 縦並びに変更 */
+    align-items: flex-start;
+    /* 左寄せに */
+  }
+  #header .logo {
+    width: 300px;
+  }
+  .pharmacist {
+    display: none;
+  }
+  .phone-text {
+    display: none;
+  }
+  .top_right {
+    width: 100%;
+    justify-content: center;
+  }
+  #header .tel {
+    margin-right: 0;
+  }
+  #header .phone {
+    font-size: 20px;
+    font-weight: 500;
+    /* padding-top: 10px; */
+  }
+
+  /* ナビメニュー */
+  #navi .nav-menu {
+       flex-direction: column;
+    /* 縦並びに変更 */
+    align-items: flex-start;
+    /* 左寄せに */
+  }
+  .nav-menu li {
+    margin-right: 0;
+    margin-bottom: 30px;
+  }
+/* ハンバーガーメニュー */
+  #navi {
+    width: 300px;
+    background: #fff;
+    padding: 25px;
+    position: fixed;
+    top: 0;
+    left: -300px;
+    bottom: 0;
+    opacity: 0;
+    overflow-y: auto;
+    transition: 0.5s;
+    z-index: 20;
+  }
+  .open #navi {
+    left: 0;
+    opacity: 1;
+  }
+  #navi ul.nav-menu {
+    margin-bottom: 30px;
+  }
+  #navi ul li {
+    padding: 10px 0;
+  }
+  .hamburger {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    position: fixed;
+    top: 22px;
+    right: 18px;
+    transition: 0.5s;
+    z-index: 20;
+  }
+  .hamburger span {
+    width: 30px;
+    height: 2px;
+    background-color: #121212;
+    border-radius: 4px;
+    display: block;
+    position: absolute;
+    left: 0;
+    transition: 0.5s;
+  }
+  .hamburger span:nth-child(1) {
+    top: 4px;
+  }
+  .hamburger span:nth-child(2) {
+    top: 14px;
+  }
+  .hamburger span:nth-child(3) {
+    bottom: 4px;
+  }
+  .open .hamburger span {
+    background-color: #fff;
+  }
+  .open .hamburger span:nth-child(1) {
+    transform: translateY(10px) rotate(-315deg);
+  }
+  .open .hamburger span:nth-child(2) {
+    opacity: 0;
+  }
+  .open .hamburger span:nth-child(3) {
+    transform: translateY(-10px) rotate(315deg);
+  }
+  #mask {
+    display: none;
+    transition: 0.5s;
+  }
+  .open #mask {
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    cursor: pointer;
+    display: block;
+    opacity: 0.8;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+  }
+/* メインビジュアル */
+main {
+  margin-top: 130px;
+  /* ヘッダーの高さを考慮 */
+}
+.mainvisual {
+  width: 100%;
+  height: calc(100vh - 130px);
+}
+.mainvisual img {
+  top: 130px;
+}
+/* 縦書きのスタイル追加 */
+.text-overlay {
+  writing-mode: vertical-rl; /* 縦書き */
+  text-align: right; /* 右寄せ */
+  top: 230px; /* 上部に配置 */
+  right: 20px; /* 右側に配置 */
+  transform: translateY(0); /* アニメーションの初期位置をリセット */
+  opacity: 0; /* モバイルでは初めから表示 */
+}
+.text-overlay p {
+  font-size: 48px; /* フォントサイズを調整 */
+  line-height: 1.5; /* 行間を調整 */
+  margin: 0; /* デフォルトのマージンをリセット */
+  text-shadow: none; /* テキストシャドウを無効にする（必要に応じて） */
+}
+/* メインナビ */
+/* 四角のスタイル */
+.main-nav ul {
+  display: block;
+}
+.main-nav ul li {
+  width: 90%;
+  margin: 0 auto;
+  margin-bottom: 18px;
+}
+.main-nav ul li a {
+  font-size: 18px;
+}
+/* メッセージ */
+.top-message {
+  flex-direction: column;
+}
+.top-message img {
+  width: 100%;
+  object-fit: cover;
+}
+.toptext {
+  width: 100%;
+}
+.messagetitle {
+  font-size: 24px;
+  font-weight: bold;
+  padding-top: 60px;
+  margin-bottom: 30px;
+}
+.top-message p {
+  line-height: 1.75;
+  font-size: 18px;
+}
+.signature img {
+  width: 30%;
+}
+/* Products */
+.overview {
+ flex-direction: column;
+}
+.overview img {
+  width: 90%;
+  object-fit: cover;
+}
+/* 左側の製品メニューリスト */
+.product-list {
+  width: 90%;
+  padding-right: 0;
+}
+/* 最後のliから余白を復活 */
+.product-list li:last-child {
+  margin-bottom: 28px;
+}
+.product-list li a {
+  font-size: 22px;
+}
+.product-list li a .more {
+  font-size: 16px;
+}
+
+/* Footer */
+.footer-content {
+  flex-direction: column;
+}
+iframe {
+  width: 100%;
+}
+.fotter-left {
+  width: 100%;
+  margin-right: 0;
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+}
+.footer-nav {
+  width: 40%;
+}
+.company {
+  width: 55%;
+}
+
+.policylist {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.footer-nav li {
+  margin-bottom: 16px;
+}
+
+.footer-nav li:last-child {
+  margin-bottom: 48px;
+}
+
+.company a {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.company p {
+  margin: 8px 0;
+  font-size: 14px;
+}
+
+.policy {
+  margin: 20px 0 0;
+}
+.policylist li {
+  margin-right: 24px;
+  font-size: 14px;
+}
+#footer a:hover {
+  font-weight: bold;
+  text-decoration: underline;
+  text-decoration-color: #007bff;
+}
+.company small {
+  font-size: 12px;
+}
+
+/* 下層ページ */
+.subpage-content {
+  padding-left: 0;
+}
+
+/* 会社案内 */
+.origin-content {
+  flex-direction: column;
+}
+.origin-content img {
+  width: 100%;
+  margin-bottom: 20px;
+}
+.origin-content .origin-text {
+  width: 100%;
+}
+.origin-content p:last-child {
+  margin-bottom: 0;
+}
+
+/* 会社概要 */
+.company-info-table th {
+  width: 130px;
+  /* SPはthの幅を狭める */
+}
+
+/* 沿革 */
+.timeline .date {
+  font-weight: bold;
+  width: 130px;
+  /* 日付の幅を指定 */
+}
+
+
+
+}
